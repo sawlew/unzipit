@@ -1,0 +1,8 @@
+body{
+    background-color: grey;
+}
+
+div#output{
+    display: flex !important;
+    flex-direction: column;
+}

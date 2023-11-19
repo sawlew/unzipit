@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        position: relative;
+    }
+    #intro{
+        position: absolute;
+    }
+    #main{
+        display: none;
+    }
+</style>
+</head>
+<body onload="startUp()">
+    <dotlottie-player id="intro" src="https://lottie.host/1b02521f-33be-4849-9de7-7c0ae53498d7/FYqeROcCQ1.json" background="transparent" speed="1.5" style="width: 100%; height: 100vh;" loop autoplay></dotlottie-player>
+<main id="main">
+    <input type="file" id="zipFileInput" accept=".zip" />
+    <button onclick="extractZip()">Extract Zip</button>
+
+    <div id="output" style="display: flex; flex-direction: column;"></div>
+</main>
+
+<script>
+    const intro = document.getElementById("intro");
+    const main = document.getElementById("main");
+
+    function startUp(){
+        setTimeout(() =>{
+            intro.style.display = "none";
+            main.style.display = "block";
+        }, 5000);
+    }
+    
+    function extractZip() {
+      const fileInput = document.getElementById('zipFileInput');
+      const file = fileInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const arrayBuffer = event.target.result;
+          const jszip = new JSZip();
+
+          jszip.loadAsync(arrayBuffer).then(function (zip) {
+            zip.forEach(function (relativePath, zipEntry) {
+              zipEntry.async('arraybuffer').then(function (data) {
+                // Create a download link for each extracted file
+                const blob = new Blob([data]);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = relativePath;
+                downloadLink.innerHTML = `Download ${relativePath}`;
+                document.getElementById('output').appendChild(downloadLink);
+              });
+            });
+          });
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
+    }
+  </script>
+  <script src="https://stuk.github.io/jszip/dist/jszip.min.js"></script>
+</body>
+</html>
