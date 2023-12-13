@@ -3,74 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Unzip It</title>
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body{
-        position: relative;
-    }
-    #intro{
-        position: absolute;
-    }
-    #main{
-        display: none;
-    }
-</style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body onload="startUp()">
-    <dotlottie-player id="intro" src="https://lottie.host/1b02521f-33be-4849-9de7-7c0ae53498d7/FYqeROcCQ1.json" background="transparent" speed="1.5" style="width: 100%; height: 100vh;" loop autoplay></dotlottie-player>
-<main id="main">
-    <input type="file" id="zipFileInput" accept=".zip" />
-    <button onclick="extractZip()">Extract Zip</button>
 
-    <div id="output" style="display: flex; flex-direction: column;"></div>
+<body onload="startUp()" class="relative bg-[#060916]">
+    <dotlottie-player id="intro" class="absolute" src="https://lottie.host/a5da9340-e190-4050-915f-991c2be0bcfa/EIdxxMTJ1q.json" background="#98b5b2" speed="1.5" style="width: 100%; height: 100vh;" direction="1" loop autoplay></dotlottie-player>
+<main id="main" class="hidden">
+    <header>
+        <h1 class="text-5xl text-[#00DBDF] text-center py-10">Unzip It</h1>
+    </header>
+    <label for="zipFileInput" class="col-span-full">
+        <div class=" mt-2 flex justify-center rounded-lg w-[50%] mx-auto border border-dashed border-[#00DBDF] px-6 py-10">
+            <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                </svg>
+                <div class="mt-4 text-sm leading-6 text-white">
+                    <span>Upload a file</span>
+                    <input id="zipFileInput" accept=".zip" name="zipFileInput" type="file" class="sr-only" onchange="handleFiles()">
+                    <p class="pl-1">(Click anywhere in the shaded area to upload a zip file)</p>
+                </div>
+                <p class="text-xs leading-5 text-white">.zip extension only</p>
+                <p id="boxContent" class="text-[#00DBDF]"></p>
+            </div>
+        </div>
+    </label>
+
+    <section class="w-[50%] mx-auto mb-5 flex flex-col items-center" id="displayFrame">
+        <button
+            class="bg-[#00DBDF] hover:bg-white active:bg-[#00DBDF] my-5 w-40 p-4 text-[#060916] rounded-md"
+            onclick="extractZip()">Extract Zip
+        </button>
+        
+        <div  class="flex flex-col bg-[#00DBDF] justify-center items-center border w-full min-h-[100px] p-6 rounded-lg">
+            <p id="outputPlaceholder" class="text-[#0E1426]">Your extracted files will appear here...</p>
+            <p id="fileDetails" class="text-bold text-[#060916] text-center mb-3 hidden"></p>
+            <div class="shadow-lg rounded-lg overflow-hidden hidden" id="tableHeader">
+    
+                <table class="w-full table-fixed">
+                    <thead>
+                        <tr class="bg-[#0E1426]">
+                            <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase">Name</th>
+                            <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase truncate">Size</th>
+                            <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase truncate">Type</th>
+                            <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase">Download</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white" id="output">  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
 </main>
 
-<script>
-    const intro = document.getElementById("intro");
-    const main = document.getElementById("main");
-
-    function startUp(){
-        setTimeout(() =>{
-            intro.style.display = "none";
-            main.style.display = "block";
-        }, 5000);
-    }
-    
-    function extractZip() {
-      const fileInput = document.getElementById('zipFileInput');
-      const file = fileInput.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const arrayBuffer = event.target.result;
-          const jszip = new JSZip();
-
-          jszip.loadAsync(arrayBuffer).then(function (zip) {
-            zip.forEach(function (relativePath, zipEntry) {
-              zipEntry.async('arraybuffer').then(function (data) {
-                // Create a download link for each extracted file
-                const blob = new Blob([data]);
-                const downloadLink = document.createElement('a');
-                downloadLink.href = URL.createObjectURL(blob);
-                downloadLink.download = relativePath;
-                downloadLink.innerHTML = `Download ${relativePath}`;
-                document.getElementById('output').appendChild(downloadLink);
-              });
-            });
-          });
-        };
-
-        reader.readAsArrayBuffer(file);
-      }
-    }
-  </script>
-  <script src="https://stuk.github.io/jszip/dist/jszip.min.js"></script>
+<script src="main.js"></script>
+<script src="https://stuk.github.io/jszip/dist/jszip.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            position: relative;
+        }
+
+        .upload-container {
+            width: 300px;
+            margin: auto;
+        }
+
+        #zipFileInput {
+            display: none;
+        }
+
+        .custom-upload {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+        #intro{
+        position: absolute;
+    }
+    #main{
+        display: none;
+    }
+    </style>
+</head>
+<body onload="startUp()>
+    <dotlottie-player id="intro" src="https://lottie.host/1b02521f-33be-4849-9de7-7c0ae53498d7/FYqeROcCQ1.json" background="transparent" speed="1.5" style="width: 100%; height: 100vh;" loop autoplay></dotlottie-player>
+<main id="main"></main>
+    <div class="upload-container"></div>
+    <!-- Hidden file input -->
+    <input type="file" id="zipFileInput" />
+
+        <!-- Custom-styled upload button -->
+        <label for="zipFileInput" class="custom-upload">Choose File</label>
+
+        <!-- Display selected file name (optional) -->
+        <div id="file-name"></div>
+
+        <button onclick="extractZip()">Extract Zip</button>
+
+        <div id="output" style="display: flex; flex-direction: column;"></div>
+    </div>
+
+</main>
+
+<script>
+    // Display selected file name (optional)
+    document.getElementById('zipFileInput').addEventListener('change', function() {
+        var fileName = this.value.split('\\').pop();
+        document.getElementById('file-name').innerText = fileName;
+    });
+</script>
+<script src="main.js"></script>
+  <script src="https://stuk.github.io/jszip/dist/jszip.min.js"></script>
+</body>
+</html>

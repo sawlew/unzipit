@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
+        <table class="w-full table-fixed">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">File Name</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">File Size</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">File Type</th>
+                    <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Download</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <tr>
+                    <td class="py-4 px-6 border-b border-gray-200">John Doe</td>
+                    <td class="py-4 px-6 border-b border-gray-200 truncate">johndoe@gmail.com</td>
+                    <td class="py-4 px-6 border-b border-gray-200">555-555-5555</td>
+                    <td class="py-4 px-6 border-b border-gray-200">
+                        <button class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Download</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
