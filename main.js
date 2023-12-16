@@ -29,9 +29,9 @@ function extractZip() {
   // Check if no file is uploaded
   if (!file) {
     const boxContent = document.getElementById("boxContent");
-    boxContent.innerHTML = "Please upload a ZIP file.";
+    boxContent.innerHTML = "No file selected!!! Please upload a ZIP file!!!.";
     clearOutput();
-    // return;
+    return;
   }
 
   const output = document.getElementById('output');
@@ -44,7 +44,7 @@ function extractZip() {
   
   const clearOutput = () => {
     placeHolder.classList.remove("hidden");
-    displayFrame.classList.remove("w-[90%]");
+    displayFrame.classList.add("lg:w-[60%]");
     tableHeader.classList = "hidden";
     fileDetails.classList = "hidden";
     output.innerHTML = "";
@@ -92,16 +92,17 @@ function extractZip() {
                 <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileSize} bytes</td>
                 <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileExtension}</td>
                 <td class=" border-b border-[#0E1426] text-center">
-                <a href="${URL.createObjectURL(blob)}" download="${relativePath}" class="inline-flex justify-center items-center p-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-              </svg>
-              </a>
+                  <a href="${URL.createObjectURL(blob)}" download="${relativePath}" class="inline-flex justify-center items-center p-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                  </a>
                 </td>
             `;
 
             output.appendChild(downloadLink);
             // displayFrame.classList.remove("w-[]");
-            displayFrame.classList.add("w-[90%]");
+            displayFrame.classList.remove("lg:w-[60%]");
           });
         });
         fileInput.value = "";
