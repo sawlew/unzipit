@@ -41,6 +41,13 @@ function handleFiles() {
   // output.innerHTML = "";
 }
 
+function loadState(){
+  const loading = document.getElementById("loadingState");
+  loading.classList.remove("hidden");
+  setTimeout(() =>{
+    loading.classList.add("hidden");
+}, 3000);
+}
 
 function extractZip() {
   const fileInput = document.getElementById('zipFileInput');
@@ -65,8 +72,8 @@ function extractZip() {
   const clearOutput = () => {
     placeHolder.classList.remove("hidden");
     displayFrame.classList.add("lg:w-[60%]");
-    tableHeader.classList = "hidden";
-    fileDetails.classList = "hidden";
+    tableHeader.classList.add("hidden");
+    fileDetails.classList.add("hidden");
     output.innerHTML = "";
   }
 
@@ -80,10 +87,10 @@ function extractZip() {
 
   if (file && fileNameExt == "zip") {
     placeHolder.classList = "hidden";
-    tableHeader.classList.remove("hidden");
-    fileDetails.classList.remove("hidden");
+    tableHeader.classList.add("hidden");
+    fileDetails.classList.add("hidden");
     output.innerHTML = "";
-
+    
     const reader = new FileReader();
     reader.onload = function (event) {
       const arrayBuffer = event.target.result;
@@ -106,8 +113,11 @@ function extractZip() {
             const downloadLink = document.createElement('tr');
             const fileSize = data.byteLength;
             const fileExtension = relativePath.split('.').pop();
-
-            downloadLink.innerHTML = `
+            loadState();
+            setTimeout(() =>{
+              tableHeader.classList.remove("hidden");
+              fileDetails.classList.remove("hidden");
+              downloadLink.innerHTML = `
                 <td class="py-4 px-6 border-b border-[#0E1426] text-center trincate">${relativePath}</td>
                 <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileSize} bytes</td>
                 <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileExtension}</td>
@@ -123,6 +133,8 @@ function extractZip() {
             output.appendChild(downloadLink);
             // displayFrame.classList.remove("w-[]");
             displayFrame.classList.remove("lg:w-[60%]");
+          }, 3000);
+            
           });
         });
         fileInput.value = "";
