@@ -3,8 +3,8 @@ function startUp(){
   const intro = document.getElementById("intro");
   const main = document.getElementById("main");
     setTimeout(() =>{
-        intro.style.display = "none";
-        main.style.display = "block";
+        intro.classList.add("hidden");
+        main.classList.remove("hidden");
     }, 5000);
 }
 
@@ -12,17 +12,20 @@ function startUp(){
 const close = document.getElementById("close");
 const open = document.getElementById("open");
 const social = document.getElementById("social");
+const backDrop = document.getElementById("backDrop");
 
 function dropDown(){
-    social.classList.add("translate-y-0");
+    social.classList.add("translate-y-[440px]");
     open.classList.add("hidden");
     close.classList.remove("hidden");
+    backDrop.classList.remove("hidden");
 }
 
 function closeUp(){
-  social.classList.remove("translate-y-0");
+  social.classList.remove("translate-y-[440px]");
   open.classList.remove("hidden");
   close.classList.add("hidden");
+  backDrop.classList.add("hidden");
 }
 
 //File name and details
