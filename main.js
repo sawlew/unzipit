@@ -8,6 +8,23 @@ function startUp(){
     }, 5000);
 }
 
+//Social section
+const close = document.getElementById("close");
+const open = document.getElementById("open");
+const social = document.getElementById("social");
+
+function dropDown(){
+    social.classList.add("translate-y-0");
+    open.classList.add("hidden");
+    close.classList.remove("hidden");
+}
+
+function closeUp(){
+  social.classList.remove("translate-y-0");
+  open.classList.remove("hidden");
+  close.classList.add("hidden");
+}
+
 //File name and details
 function handleFiles() {
   const fileInput = document.getElementById('zipFileInput');

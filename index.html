@@ -6,14 +6,36 @@
     <title>Unzip It</title>
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
-<body onloa"startUp()" class="relative bg-[#060916]">
-    <!-- <dotlottie-player id="intro" class="absolute" src="https://lottie.host/a5da9340-e190-4050-915f-991c2be0bcfa/EIdxxMTJ1q.json" background="#98b5b2" speed="1.5" style="width: 100%; height: 100vh;" direction="1" loop autoplay></dotlottie-player> -->
-<main id="main" class="hidde">
+<body onload="startUp()" class="relative bg-[#060916]">
+    <dotlottie-player id="intro" class="absolute z-10" src="https://lottie.host/a5da9340-e190-4050-915f-991c2be0bcfa/EIdxxMTJ1q.json" background="#98b5b2" speed="1.5" style="width: 100%; height: 100vh;" direction="1" loop autoplay></dotlottie-player>
+<div class="absolute right-5 top-0 z-1 inline-flex flex-col gap-5">
+    <ion-icon id="close" onclick="closeUp()" name="close-circle-outline" class="text-[#98b5b2] text-3xl cursor-pointer hidden"></ion-icon>
+    <ion-icon id="open" onclick="dropDown()" name="chevron-down-circle-outline" class="text-[#98b5b2] text-3xl cursor-pointer"></ion-icon>
+
+    <div id="social" class="flex flex-col justify-evenly gap-5 duration-200 ease-linear -translate-y-[140%] bg-[#060916]" onclick="closeUp()">
+        <a  href="https://github.com/sawlew" target="_blank"><ion-icon name="logo-github"
+                class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
+        <a  href="https://twitter.com/sawlew" target="_blank"><ion-icon name="logo-twitter"
+                class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
+        <a  href="https://www.linkedin.com/in/sawlew/" target="_blank"><ion-icon name="logo-linkedin"
+                class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
+        <a  href="mailto: sawlew@gmail.com" target="_blank"><ion-icon name="mail-outline"
+                class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
+        <a  href="https://api.whatsapp.com/send?phone=2348024182946" target="_blank"><ion-icon name="logo-whatsapp" 
+                class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
+        <a  href="tel:+2348024182946"><ion-icon name="call-outline"
+                class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
+    </div>
+</div>
+    
+<main id="main">
     <header class="flex justify-center my-5">
     <div class="relative inline-block">
-        <p class="absolute right-[6.5%] bg-[#98b5b2] top-[64%] text-[#060916] text-[8px] writing-mode-vertical-rl whitespace-nowrap transform -rotate-90">Sawlew</p>
+        <p class="absolute z-1 right-[6.5%] bg-[#98b5b2] top-[64%] text-[#060916] text-[8px] writing-mode-vertical-rl whitespace-nowrap transform -rotate-90">Sawlew</p>
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
             width="129" height="68" viewBox="0 0 139.000000 78.000000"
             preserveAspectRatio="xMidYMid meet">
@@ -78,6 +100,7 @@
     </div>
         <!-- <h1 class="text-5xl text-[#98b5b2] text-center py-10">Unzip It</h1> -->
     </header>
+
     <div  class="col-span-full">
         <label for="zipFileInput" class="cursor-pointer mt-2 flex justify-center rounded-lg w-[90%] lg:w-[60%] mx-auto border border-dashed border-[#98b5b2] px-6 py-10">
             <div class="text-center">
