@@ -2,6 +2,12 @@
 function startUp(){
   const intro = document.getElementById("intro");
   const main = document.getElementById("main");
+  const mainLogo = document.getElementById("mainLogo");
+  const author = document.getElementById("author");
+
+  mainLogo.classList.add("translate-y-[200px]");
+  author.classList.add("translate-y-[130px]");
+
     setTimeout(() =>{
         intro.classList.add("hidden");
         main.classList.remove("hidden");
@@ -56,8 +62,11 @@ function extractZip() {
   // Check if no file is uploaded
   if (!file) {
     const boxContent = document.getElementById("boxContent");
-    boxContent.innerHTML = "No file selected!!! Please upload a ZIP file!!!.";
-    clearOutput();
+    boxContent.innerHTML = `
+    <span class="text-red-500">
+      No file selected!!! Please upload a ZIP file!!!.
+    </span>`;
+      clearOutput();
     return;
   }
 
@@ -78,7 +87,10 @@ function extractZip() {
   }
 
   const handleUnsupportedFile = () => {
-    boxContent.innerHTML = "Unsupported file selected";
+    boxContent.innerHTML = `
+    <span class="text-red-500">
+      Unsupported file selected
+    </span>`;
     clearOutput();
   };
   
@@ -118,9 +130,9 @@ function extractZip() {
               tableHeader.classList.remove("hidden");
               fileDetails.classList.remove("hidden");
               downloadLink.innerHTML = `
-                <td class="py-4 px-6 border-b border-[#0E1426] text-center trincate">${relativePath}</td>
-                <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileSize} bytes</td>
-                <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileExtension}</td>
+                <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${relativePath}</td>
+                <td class="hidden sm:table-cell py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileSize} bytes</td>
+                <td class="hidden sm:table-cell py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileExtension}</td>
                 <td class=" border-b border-[#0E1426] text-center">
                   <a href="${URL.createObjectURL(blob)}" download="${relativePath}" class="inline-flex justify-center items-center p-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

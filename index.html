@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unzip It || By Sawlew</title>
+    <title>UnzipIt || By Sawlew</title>
     <link rel="icon" sizes="32x32" href="unziplogo.png" />
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,10 +13,13 @@
 
 <body onload="startUp()" class="bg-[#060916]">
     <div id="intro" class="relative h-screen w-full overflow-hidden">
+        <div class="absolute z-20 w-full flex flex-col items-center">
+            <img id="mainLogo" class="absolute top-[-200px] duration-500 ease-linear" src="unzipitbysawlew.png" alt="">
+            <p id="author" class="absolute top-[-20px] duration-1000 ease-linear text-[#364A79]">BY SAWLEW</p>
+        </div>
+        
         <dotlottie-player class="absolute z-10" src="https://lottie.host/a5da9340-e190-4050-915f-991c2be0bcfa/EIdxxMTJ1q.json" background="#98b5b2" speed="1.5" style="width: 100%; height: 100vh;" direction="1" loop autoplay></dotlottie-player>
     </div>
-    
-
     
     <main id="main" class="hidden">
         <header class="flex justify-center my-5">
@@ -88,17 +91,17 @@
         </header>
 
         <div  class="col-span-full">
-            <label for="zipFileInput" class="cursor-pointer mt-2 flex justify-center rounded-lg w-[90%] lg:w-[60%] mx-auto border border-dashed border-[#98b5b2] px-6 py-10">
+            <label for="zipFileInput" class="cursor-pointer mt-2 flex justify-center rounded-lg w-[90%] lg:w-[60%] mx-auto border-2 border-dashed border-[#98b5b2] px-6 py-5">
                 <div class="text-center">
-                    <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <svg class="mx-auto h-12 w-12 text-gray-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
                     </svg>
                     <div class="mt-4 text-sm leading-6 text-white">
-                        <span>Upload a file</span>
+                        <span class="text-gray-500">Upload a file</span>
                         <input id="zipFileInput" accept=".zip" name="zipFileInput" type="file" class="sr-only" onchange="handleFiles()">
-                        <p class="pl-1">(Click anywhere in the shaded area to upload a zip file)</p>
+                        <p class="text-gray-500">(Click anywhere within the dotted perimeter to upload a zip file)</p>
                     </div>
-                    <p class="text-xs leading-5 text-white">.zip extension only</p>
+                    <p class="text-xs leading-5 text-gray-500">.zip extension only</p>
                     <p id="boxContent" class="text-[#98b5b2]"></p>
                 </div>
             
@@ -123,10 +126,10 @@
                     <table class="w-full table-fixed">
                         <thead>
                             <tr class="bg-[#0E1426]">
-                                <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase">Name</th>
-                                <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase truncate">Size</th>
-                                <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase truncate">Type</th>
-                                <th class="w-1/4 py-4 px-6 text-center text-white font-bold uppercase">Download</th>
+                                <th class="py-4 px-6 text-center text-white font-bold uppercase">Name</th>
+                                <th class="hidden sm:table-cell py-4 px-6 text-center text-white font-bold uppercase truncate">Size</th>
+                                <th class="hidden sm:table-cell py-4 px-6 text-center text-white font-bold uppercase truncate">Type</th>
+                                <th class=" py-4 px-6 text-center text-white font-bold uppercase">Download</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white" id="output">  
@@ -139,12 +142,12 @@
 
 
 <!-- Overlay and Socials (start)-->
-    <div id="backDrop" onclick="closeUp()" class="absolute top-0 z-1 w-full h-screen bg-[#1c036163] backdrop-filter backdrop-blur-lg hidden"></div>
-    <div class="absolute top-3 right-5 z-2">
+    <div id="backDrop" onclick="closeUp()" class="fixed top-0 z-1 w-full min-h-screen bg-[#1c036163] backdrop-filter backdrop-blur-lg hidden"></div>
+    <div class="fixed top-3 right-5 z-2">
         <ion-icon id="close" onclick="closeUp()" name="close-circle-outline" class="text-[#98b5b2] text-4xl hover:scale-[1.5] duration-200 ease-linear cursor-pointer hidden"></ion-icon>
         <ion-icon id="open" onclick="dropDown()" name="chevron-down-circle-outline" class="text-[#98b5b2] text-4xl hover:scale-[1.5] duration-200 ease-linear cursor-pointer"></ion-icon>
     </div>
-    <div id="social" class="absolute right-6 top-[-350px] duration-300 ease-linear z-1">
+    <div id="social" class="fixed right-6 top-[-350px] duration-300 ease-linear z-1">
         <div class="flex flex-col justify-evenly gap-5" onclick="closeUp()">
             <a  href="https://github.com/sawlew" target="_blank"><ion-icon name="logo-github"
                     class="text-[#98b5b2] hover:scale-[1.5] duration-200 ease-linear text-3xl"></ion-icon></a>
