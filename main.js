@@ -131,8 +131,8 @@ function extractZip() {
               fileDetails.classList.remove("hidden");
               downloadLink.innerHTML = `
                 <td class="py-4 px-6 border-b border-[#0E1426] text-center truncate">${relativePath}</td>
-                <td class="hidden sm:table-cell py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileSize} bytes</td>
                 <td class="hidden sm:table-cell py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileExtension}</td>
+                <td class="hidden sm:table-cell py-4 px-6 border-b border-[#0E1426] text-center truncate">${fileSize} bytes</td>                
                 <td class=" border-b border-[#0E1426] text-center">
                   <a href="${URL.createObjectURL(blob)}" download="${relativePath}" class="inline-flex justify-center items-center p-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
